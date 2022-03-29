@@ -28,6 +28,7 @@ class ProductCollection extends JsonResource
             'vendor' => $this->vendor ?  $this->vendor->name : null,
             "is_active" => $this->is_active ? 'active' : "deactive",
             "image" => $this->image && File::exists(public_path($this->image)) ? asset($this->image) : pathNoImage(),
+            'created_at' => $this->created_at?->format('d-m-Y'),
         ];
     }
 }

@@ -27,6 +27,16 @@ function orderNumberOfRows($paginate_count = null)
 }
 // --------------------------------------------
 
+
+if (!function_exists('fileExists')) {
+
+    function fileExists($path)
+    {
+        return File::exists($path);
+    }
+}
+
+
 // --------------------------------------------
 
 

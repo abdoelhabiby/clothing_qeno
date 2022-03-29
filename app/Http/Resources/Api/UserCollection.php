@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Api;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class CategoryCollection extends JsonResource
+class UserCollection extends JsonResource
 {
-
-
     /**
      * Transform the resource collection into an array.
      *
@@ -18,16 +16,14 @@ class CategoryCollection extends JsonResource
      */
     public function toArray($request)
     {
-        // 'posts' => PostResource::collection($this->whenLoaded('posts')),
 
         return [
-            "name" => $this->name,
-            "slug" => $this->slug,
-            "is_active" => $this->is_active ? 'active' : "deactive",
-            "image" => $this->image && File::exists(public_path($this->image)) ? asset($this->image) : pathNoImage(),
-            "products" => ProductCollection::collection($this->whenLoaded('products')),
-            'created_at' => $this->created_at?->format('d-m-Y'),
 
+            "name" => $this->name,
+            "email" => $this->email,
+            "image" => $this->image && File::exists(public_path($this->image)) ? asset($this->image) : pathNoImage(),
         ];
+
+
     }
 }

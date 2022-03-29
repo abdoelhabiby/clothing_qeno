@@ -73,6 +73,7 @@ $model_name = 'users';
                                                     <th>#</th>
                                                     <th>Name</th>
                                                     <th>email</th>
+                                                    <th>image</th>
                                                     <th>Action</th>
 
                                                 </tr>
@@ -86,7 +87,12 @@ $model_name = 'users';
                                                             </td>
                                                             <td>{{ $row->name }}</td>
                                                             <td>{{ $row->email }}</td>
-                                                            <td>{{ $row->is_active ? 'active' : 'deactive' }}</td>
+                                                            <td>
+                                                                @if($row->image && fileExists(public_path($row->image)))
+                                                                    <img src="{{ asset($row->image) }}" alt="" width="50" height="50" class="rounded-circle">
+                                                                @endif
+
+                                                            </td>
                                                             <td>
                                                                 <div class="btn-group" role="group"
                                                                     aria-label="Basic example">

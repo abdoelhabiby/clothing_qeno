@@ -66,11 +66,10 @@ $model_name = 'users';
                                 <div class="card-content collapse show">
                                     <div class="card-body">
 
-                                        @if ($row->image && \File::exists(public_path($row->image)))
+                                        @if ($row->image && fileExists(public_path($row->image)))
                                             <div class="row mb-3">
                                                 <div class="col-md-12 d-flex justify-content-center">
-                                                    <img src="{{ asset($row->image) }}"
-                                                        style="min-height: 300px; max-height:500px" alt="">
+                                                    <img src="{{ asset($row->image) }}" style="height: 130px; height:130px" class="rounded-circle" alt="">
                                                 </div>
                                             </div>
                                         @endif

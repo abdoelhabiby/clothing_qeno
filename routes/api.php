@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Front\UserController;
 use App\Http\Controllers\Api\Front\ProductController;
 use App\Http\Controllers\Api\Front\CategoryController;
 
@@ -18,25 +19,20 @@ use App\Http\Controllers\Api\Front\CategoryController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('user')->group(function () {
+
+    Route::get('/', [UserController::class, 'getUser'])->middleware('auth:sanctum');
+
+    Route::post('/register', [UserController::class, 'register']);
+    Route::post('/login', [UserController::class, 'login']);
 });
 
 
 
-Route::post('categories',function(Request $request){
-    $vaidted = $request->validate([
-        'name' => 'required|string',
-        'slug' => 'required|string'
-    ]);
-
-    return $vaidted;
-});
 
 
-Route::get('categories',[CategoryController::class,'index']);
+Route::get('categories', [CategoryController::class, 'index']);
 
-Route::get('category/{category:slug}/products',[CategoryController::class,'productsCategory']);
+Route::get('category/{category:slug}/products', [CategoryController::class, 'productsCategory']);
 
-Route::get('products',[ProductController::class,'index']);
-
+Route::get('products', [ProductController::class, 'index']);
