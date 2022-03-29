@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Front;
 
-use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\CategoryCollection;
+use App\Http\Controllers\Api\Front\BaseController;
 
 class CategoryController extends BaseController
 {
@@ -27,8 +26,11 @@ class CategoryController extends BaseController
 
 
         $per_page = $this->per_page_paginate;
+        $query_append = ['per_page' => $per_page];
 
-        $categories_paginate = CategoryCollection::collection(Category::paginate($per_page))->response()->getData(true);
+        $categories = Category::latest()->paginate($per_page)->appends($query_append);
+
+        $categories_paginate = CategoryCollection::collection($categories)->response()->getData(true);
 
         if (isset($categories_paginate['meta']['links'])) {
             unset($categories_paginate['meta']['links']);
@@ -46,7 +48,9 @@ class CategoryController extends BaseController
     {
         $per_page = $this->per_page_paginate;
 
-        $products = $category->products()->paginate($per_page);
+        $query_append = ['per_page' => $per_page];
+
+        $products = $category->products()->latest()->paginate($per_page)->appends($query_append);
 
         $category = new CategoryCollection($category);
 

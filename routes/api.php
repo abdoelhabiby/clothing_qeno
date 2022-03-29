@@ -1,11 +1,11 @@
 <?php
 
-use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Resources\CategoryCollection;
-use App\Http\Controllers\Api\ProductController;
-use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\Front\ProductController;
+use App\Http\Controllers\Api\Front\CategoryController;
+
+
 
 /*
 |--------------------------------------------------------------------------
