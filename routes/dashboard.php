@@ -13,6 +13,7 @@ if (!defined('DASHBOARD_PAGINATE_COUNT')) {
 Route::name('dashboard.')->group(function () {
 
 
+
     Route::middleware(['auth:admin'])->group(function () {
 
         Route::get('/', [DashboardController::class, 'index'])->name('home');
