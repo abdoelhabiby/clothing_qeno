@@ -15,15 +15,16 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \Eloquent::unguard();
+        // \Eloquent::unguard();
 
 		//disable foreign key check for this connection before running seeders
-		\DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+		// \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
 
         $this->call(AdminSeeder::class);
         $this->call(CategorySeeder::class);
-        \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        $this->call(ProductSeeder::class);
+        // \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
     }
 }

@@ -11,9 +11,41 @@
                     <span class="menu-title" data-i18n="">Home</span></a>
             </li>
             {{-- --------------------------------------------------- --}}
+
+
+                {{-- -------------------users----------------------- --}}
+
+                <li class="nav-item @if (request()->routeIs(['dashboard.users.index', 'dashboard.users.create','dashboard.users.edit'])) open active @endif }}">
+
+                    @php
+                        $module_name = 'users';
+                    @endphp
+
+                    <a href=""><i class="la la-users"></i>
+                        <span class="menu-title" data-i18n="nav.dash.main"> {{ ucfirst($module_name) }}</span>
+                        <span
+                            class="badge badge badge-info badge-pill float-right mr-2">{{ App\Models\User::count() }}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li class="{{ request()->routeIs('dashboard.' . $module_name . '.index') ? 'active' : '' }}"><a
+                                class="menu-item" href="{{ route('dashboard.' . $module_name . '.index') }}"
+                                data-i18n="nav.dash.ecommerce">show all </a>
+                        </li>
+                        <li class="{{ request()->routeIs('dashboard.' . $module_name . '.create') ? 'active' : '' }}">
+                            <a class="menu-item" href="{{ route('dashboard.' . $module_name . '.create') }}"
+                                data-i18n="nav.dash.crypto">
+                                add
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+                {{-- --------------------------------------------------- --}}
+
             {{-- -------------------categories----------------------- --}}
 
-            <li class="nav-item @if (request()->routeIs(['dashboard.categories.index', 'dashboard.categories.create'])) open active @endif }}">
+            <li class="nav-item @if (request()->routeIs(['dashboard.categories.index', 'dashboard.categories.create','dashboard.categories.edit'])) open active @endif }}">
 
                 @php
                     $module_name = 'categories';
@@ -44,7 +76,7 @@
 
                 {{-- -------------------products----------------------- --}}
 
-                <li class="nav-item @if (request()->routeIs(['dashboard.products.index', 'dashboard.products.create'])) open active @endif }}">
+                <li class="nav-item @if (request()->routeIs(['dashboard.products.index', 'dashboard.products.create','dashboard.products.edit'])) open active @endif }}">
 
                     @php
                         $module_name = 'products';

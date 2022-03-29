@@ -2,7 +2,7 @@
 
 
 @php
-$model_name = 'categories';
+$model_name = 'users';
 @endphp
 
 
@@ -71,9 +71,8 @@ $model_name = 'categories';
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>slug</th>
                                                     <th>Name</th>
-                                                    <th>Active</th>
+                                                    <th>email</th>
                                                     <th>Action</th>
 
                                                 </tr>
@@ -85,8 +84,8 @@ $model_name = 'categories';
                                                         <tr>
                                                             <td> {{ orderNumberOfRows($rows->perPage()) + $index + 1 }}
                                                             </td>
-                                                            <td>{{ $row->slug }}</td>
                                                             <td>{{ $row->name }}</td>
+                                                            <td>{{ $row->email }}</td>
                                                             <td>{{ $row->is_active ? 'active' : 'deactive' }}</td>
                                                             <td>
                                                                 <div class="btn-group" role="group"

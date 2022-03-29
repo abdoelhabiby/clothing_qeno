@@ -14,7 +14,7 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        Category::truncate();
+        // Category::truncate();
 
         $categories = [
            ['slug' => 'hats', 'name' => 'hats'],

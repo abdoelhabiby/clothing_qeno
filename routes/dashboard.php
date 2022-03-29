@@ -17,11 +17,15 @@ Route::name('dashboard.')->group(function () {
 
         Route::get('/', [DashboardController::class, 'index'])->name('home');
 
-        Route::resource('categories',\CategoryController::class,[
+        Route::resource('categories',CategoryController::class,[
             'except' => 'show'
         ]);
 
-        Route::resource('products',\ProductController::class);
+        Route::resource('users',UserController::class,[
+            'except' => 'show'
+        ]);
+
+        Route::resource('products',ProductController::class);
 
         Route::post('logout',[AuthController::class,'logout'])->name('logout');
     });

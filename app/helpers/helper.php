@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\File;
 
-if(!function_exists('admin')){
+if (!function_exists('admin')) {
 
-    function admin(){
+    function admin()
+    {
         return auth('admin')->check() ? auth('admin')->user() : null;
     }
 }
@@ -29,15 +30,28 @@ function orderNumberOfRows($paginate_count = null)
 // --------------------------------------------
 
 
-if(!function_exists('pathNoImage')){
+if (!function_exists('pathNoImage')) {
 
-    function pathNoImage(){
+    function pathNoImage()
+    {
         $path = public_path('images/noImage.jpg');
         return File::exists($path) ? asset('images/noImage.jpg') : null;
     }
 }
 
 // --------------------------------------------
+if (!function_exists('catchErro')) {
+
+    function catchErro($route_name, $error_catch, $message = 'some errors happend pleas try again later')
+    {
+
+        \Illuminate\Support\Facades\Log::alert($error_catch);
+
+        return redirect()->route($route_name)->with(['error_message' => $message]);
+    }
+}
+
+
 // --------------------------------------------
 // --------------------------------------------
 // --------------------------------------------

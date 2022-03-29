@@ -158,7 +158,6 @@ class CategoryController extends Controller
             return redirect()->route('dashboard.categories.index')->with('success_message', 'succes delete category');
         } catch (\Throwable $th) {
 
-
             return redirect()->back()->with('error_message', 'some erros happend tray again');
         }
     }//----end of method

@@ -14,8 +14,9 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-         Admin::truncate();
+        //  Admin::truncate();
 
         Admin::firstOrCreate(['name' => 'tengen','email' => 't@t.com','password' => bcrypt(12345678)]);
+        Admin::firstOrCreate(['name' => 'qeno','email' => 'a@a.com','password' => bcrypt(12345678)]);
     }
 }
