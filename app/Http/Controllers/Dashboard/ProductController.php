@@ -89,7 +89,6 @@ class ProductController extends Controller
 
             DB::rollback();
 
-
             return redirect()->back()->with('error_message', 'some erros happend tray again');
         }
 
