@@ -50,152 +50,163 @@
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/dashboard') }}/assets/css/style.css">
     <!-- END Custom CSS-->
+
+
+
+
 </head>
 
 <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click"
     data-menu="vertical-menu" data-col="2-columns">
     <!-- fixed-top-->
 
-@include('dashboard.layouts._nav')
+    @include('dashboard.layouts._nav')
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
- @include('dashboard.layouts._sidbar')
+    @include('dashboard.layouts._sidbar')
 
 
 
 
- <div class="app-content content">
-     <div class="content-wrapper">
-         <div class="content-header row">
-         </div>
-         <div class="content-body">
+    <div class="app-content content">
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
 
 
-             <!-- eCommerce statistic -->
-             <div class="row">
-                 <div class="col-xl-3 col-lg-6 col-12">
-                     <div class="card pull-up">
-                         <div class="card-content">
-                             <div class="card-body">
-                                 <div class="media d-flex">
-                                     <div class="media-body text-left">
-                                         <h3 class="info">850</h3>
-                                         <h6>Products Sold</h6>
-                                     </div>
-                                     <div>
-                                         <i class="icon-basket-loaded info font-large-2 float-right"></i>
-                                     </div>
-                                 </div>
-                                 <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                     <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 80%"
-                                         aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="col-xl-3 col-lg-6 col-12">
-                     <div class="card pull-up">
-                         <div class="card-content">
-                             <div class="card-body">
-                                 <div class="media d-flex">
-                                     <div class="media-body text-left">
-                                         <h3 class="warning">$748</h3>
-                                         <h6>Net Profit</h6>
-                                     </div>
-                                     <div>
-                                         <i class="icon-pie-chart warning font-large-2 float-right"></i>
-                                     </div>
-                                 </div>
-                                 <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                     <div class="progress-bar bg-gradient-x-warning" role="progressbar"
-                                         style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="col-xl-3 col-lg-6 col-12">
-                     <div class="card pull-up">
-                         <div class="card-content">
-                             <div class="card-body">
-                                 <div class="media d-flex">
-                                     <div class="media-body text-left">
-                                         <h3 class="success">146</h3>
-                                         <h6>New Customers</h6>
-                                     </div>
-                                     <div>
-                                         <i class="icon-user-follow success font-large-2 float-right"></i>
-                                     </div>
-                                 </div>
-                                 <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                     <div class="progress-bar bg-gradient-x-success" role="progressbar"
-                                         style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="col-xl-3 col-lg-6 col-12">
-                     <div class="card pull-up">
-                         <div class="card-content">
-                             <div class="card-body">
-                                 <div class="media d-flex">
-                                     <div class="media-body text-left">
-                                         <h3 class="danger">99.89 %</h3>
-                                         <h6>Customer Satisfaction</h6>
-                                     </div>
-                                     <div>
-                                         <i class="icon-heart danger font-large-2 float-right"></i>
-                                     </div>
-                                 </div>
-                                 <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                     <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 85%"
-                                         aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-             <!--/ eCommerce statistic -->
-             <!-- Products sell and New Orders -->
-             <div class="row match-height">
-                 <div class="col-xl-8 col-12" id="ecommerceChartView">
-                     <div class="card card-shadow">
-                         <div class="card-header card-header-transparent py-20">
-                             <div class="btn-group dropdown">
-                                 <a href="#" class="text-body dropdown-toggle blue-grey-700"
-                                     data-toggle="dropdown">PRODUCTS
-                                     SALES</a>
-                                 <div class="dropdown-menu animate" role="menu">
-                                     <a class="dropdown-item" href="#" role="menuitem">Sales</a>
-                                     <a class="dropdown-item" href="#" role="menuitem">Total sales</a>
-                                     <a class="dropdown-item" href="#" role="menuitem">profit</a>
-                                 </div>
-                             </div>
-                             <ul class="nav nav-pills nav-pills-rounded chart-action float-right btn-group" role="group">
-                                 <li class="nav-item"><a class="active nav-link" data-toggle="tab"
-                                         href="#scoreLineToDay">Day</a></li>
-                                 <li class="nav-item"><a class="nav-link" data-toggle="tab"
-                                         href="#scoreLineToWeek">Week</a></li>
-                                 <li class="nav-item"><a class="nav-link" data-toggle="tab"
-                                         href="#scoreLineToMonth">Month</a></li>
-                             </ul>
-                         </div>
-                         <div class="widget-content tab-content bg-white p-20">
-                             <div class="ct-chart tab-pane active scoreLineShadow" id="scoreLineToDay"></div>
-                             <div class="ct-chart tab-pane scoreLineShadow" id="scoreLineToWeek"></div>
-                             <div class="ct-chart tab-pane scoreLineShadow" id="scoreLineToMonth"></div>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="col-xl-4 col-lg-12">
+                <!-- eCommerce statistic -->
+                <div class="row">
+                    <div class="col-xl-3 col-lg-6 col-12">
+                        <div class="card pull-up">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media d-flex">
+                                        <div class="media-body text-left">
+                                            <h3 class="info">850</h3>
+                                            <h6>Products Sold</h6>
+                                        </div>
+                                        <div>
+                                            <i class="icon-basket-loaded info font-large-2 float-right"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                        <div class="progress-bar bg-gradient-x-info" role="progressbar"
+                                            style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-12">
+                        <div class="card pull-up">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media d-flex">
+                                        <div class="media-body text-left">
+                                            <h3 class="warning">$748</h3>
+                                            <h6>Net Profit</h6>
+                                        </div>
+                                        <div>
+                                            <i class="icon-pie-chart warning font-large-2 float-right"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                        <div class="progress-bar bg-gradient-x-warning" role="progressbar"
+                                            style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-12">
+                        <div class="card pull-up">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media d-flex">
+                                        <div class="media-body text-left">
+                                            <h3 class="success">146</h3>
+                                            <h6>New Customers</h6>
+                                        </div>
+                                        <div>
+                                            <i class="icon-user-follow success font-large-2 float-right"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                        <div class="progress-bar bg-gradient-x-success" role="progressbar"
+                                            style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-12">
+                        <div class="card pull-up">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="media d-flex">
+                                        <div class="media-body text-left">
+                                            <h3 class="danger">99.89 %</h3>
+                                            <h6>Customer Satisfaction</h6>
+                                        </div>
+                                        <div>
+                                            <i class="icon-heart danger font-large-2 float-right"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                        <div class="progress-bar bg-gradient-x-danger" role="progressbar"
+                                            style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/ eCommerce statistic -->
+                <!-- Products sell and New Orders -->
+                <div class="row match-height">
+                    <div class="col-xl-8 col-12" id="ecommerceChartView">
+                        <div class="card card-shadow">
+                            <div class="card-header card-header-transparent py-20">
+                                <div class="btn-group dropdown">
+                                    <a href="#" class="text-body dropdown-toggle blue-grey-700"
+                                        data-toggle="dropdown">PRODUCTS
+                                        SALES</a>
+                                    <div class="dropdown-menu animate" role="menu">
+                                        <a class="dropdown-item" href="#" role="menuitem">Sales</a>
+                                        <a class="dropdown-item" href="#" role="menuitem">Total sales</a>
+                                        <a class="dropdown-item" href="#" role="menuitem">profit</a>
+                                    </div>
+                                </div>
+                                <ul class="nav nav-pills nav-pills-rounded chart-action float-right btn-group"
+                                    role="group">
+                                    <li class="nav-item"><a class="active nav-link" data-toggle="tab"
+                                            href="#scoreLineToDay">Day</a></li>
+                                    <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                            href="#scoreLineToWeek">Week</a></li>
+                                    <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                            href="#scoreLineToMonth">Month</a></li>
+                                </ul>
+                            </div>
+                            <div class="widget-content tab-content bg-white p-20">
+                                <div class="ct-chart tab-pane active scoreLineShadow" id="scoreLineToDay"></div>
+                                <div class="ct-chart tab-pane scoreLineShadow" id="scoreLineToWeek"></div>
+                                <div class="ct-chart tab-pane scoreLineShadow" id="scoreLineToMonth"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                    {{-- <div class="col-xl-4 col-lg-12">
                      <div class="card">
                          <div class="card-header">
                              <h4 class="card-title">New Orders</h4>
@@ -371,11 +382,11 @@
                              </div>
                          </div>
                      </div>
-                 </div>
-             </div>
-             <!--/ Products sell and New Orders -->
-             <!-- Recent Transactions -->
-             <div class="row">
+                 </div> --}}
+                </div>
+                <!--/ Products sell and New Orders -->
+                <!-- Recent Transactions -->
+                {{-- <div class="row">
                  <div id="recent-transactions" class="col-12">
                      <div class="card">
                          <div class="card-header">
@@ -650,58 +661,62 @@
                          </div>
                      </div>
                  </div>
-             </div>
-             <!--/ Recent Transactions -->
-             <!--Recent Orders & Monthly Sales -->
-             <div class="row match-height">
-                 <div class="col-xl-8 col-lg-12">
-                     <div class="card">
-                         <div class="card-content ">
-                             <div id="cost-revenue" class="height-250 position-relative"></div>
-                         </div>
-                         <div class="card-footer">
-                             <div class="row mt-1">
-                                 <div class="col-3 text-center">
-                                     <h6 class="text-muted">Total Products</h6>
-                                     <h2 class="block font-weight-normal">18.6 k</h2>
-                                     <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                         <div class="progress-bar bg-gradient-x-info" role="progressbar"
-                                             style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-3 text-center">
-                                     <h6 class="text-muted">Total Sales</h6>
-                                     <h2 class="block font-weight-normal">64.54 M</h2>
-                                     <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                         <div class="progress-bar bg-gradient-x-warning" role="progressbar"
-                                             style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-3 text-center">
-                                     <h6 class="text-muted">Total Cost</h6>
-                                     <h2 class="block font-weight-normal">24.38 B</h2>
-                                     <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                         <div class="progress-bar bg-gradient-x-danger" role="progressbar"
-                                             style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-3 text-center">
-                                     <h6 class="text-muted">Total Revenue</h6>
-                                     <h2 class="block font-weight-normal">36.72 M</h2>
-                                     <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                         <div class="progress-bar bg-gradient-x-success" role="progressbar"
-                                             style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="col-xl-4 col-lg-12">
+             </div> --}}
+                <!--/ Recent Transactions -->
+                <!--Recent Orders & Monthly Sales -->
+                <div class="row match-height">
+                    <div class="col-xl-8 col-lg-12">
+                        <div class="card">
+                            <div class="card-content ">
+                                <div id="cost-revenue" class="height-250 position-relative"></div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row mt-1">
+                                    <div class="col-3 text-center">
+                                        <h6 class="text-muted">Total Products</h6>
+                                        <h2 class="block font-weight-normal">18.6 k</h2>
+                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                            <div class="progress-bar bg-gradient-x-info" role="progressbar"
+                                                style="width: 70%" aria-valuenow="70" aria-valuemin="0"
+                                                aria-valuemax="100">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3 text-center">
+                                        <h6 class="text-muted">Total Sales</h6>
+                                        <h2 class="block font-weight-normal">64.54 M</h2>
+                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                            <div class="progress-bar bg-gradient-x-warning" role="progressbar"
+                                                style="width: 60%" aria-valuenow="60" aria-valuemin="0"
+                                                aria-valuemax="100">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3 text-center">
+                                        <h6 class="text-muted">Total Cost</h6>
+                                        <h2 class="block font-weight-normal">24.38 B</h2>
+                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                            <div class="progress-bar bg-gradient-x-danger" role="progressbar"
+                                                style="width: 40%" aria-valuenow="40" aria-valuemin="0"
+                                                aria-valuemax="100">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3 text-center">
+                                        <h6 class="text-muted">Total Revenue</h6>
+                                        <h2 class="block font-weight-normal">36.72 M</h2>
+                                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                            <div class="progress-bar bg-gradient-x-success" role="progressbar"
+                                                style="width: 90%" aria-valuenow="90" aria-valuemin="0"
+                                                aria-valuemax="100">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- <div class="col-xl-4 col-lg-12">
                      <div class="card">
                          <div class="card-content">
                              <div class="card-body sales-growth-chart">
@@ -719,11 +734,11 @@
                              </div>
                          </div>
                      </div>
-                 </div>
-             </div>
-             <!--/Recent Orders & Monthly Sales -->
-             <!-- Basic Horizontal Timeline -->
-             <div class="row match-height">
+                 </div> --}}
+                </div>
+                <!--/Recent Orders & Monthly Sales -->
+                <!-- Basic Horizontal Timeline -->
+                {{-- <div class="row match-height">
                  <div class="col-xl-4 col-lg-12">
                      <div class="card">
                          <div class="card-header">
@@ -976,12 +991,16 @@
                          </div>
                      </div>
                  </div>
-             </div>
-             <!--/ Basic Horizontal Timeline -->
+             </div> --}}
+                <!--/ Basic Horizontal Timeline -->
 
-         </div>
-     </div>
- </div>
+
+                <canvas id="myChart" width="400" height="400"></canvas>
+
+
+            </div>
+        </div>
+    </div>
 
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
@@ -1021,8 +1040,10 @@
     <!-- END PAGE LEVEL JS-->
 
 
+
+
+
+
 </body>
 
 </html>
-
-

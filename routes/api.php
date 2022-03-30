@@ -33,6 +33,8 @@ Route::prefix('user')->group(function () {
 
 Route::get('categories', [CategoryController::class, 'index']);
 
+Route::get('categories/products', [CategoryController::class, 'categoriesProducts']);
+
 Route::get('category/{category:slug}/products', [CategoryController::class, 'productsCategory']);
 
 Route::get('products', [ProductController::class, 'index']);

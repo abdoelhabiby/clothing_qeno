@@ -66,6 +66,27 @@ class CategoryController extends BaseController
         return $this->sendResponse($response, '');
     }
     // -------------------------------------------------------------
+
+    public function categoriesProducts()
+    {
+
+
+
+
+        $categories = Category::latest()->with(['products' => function($product){
+            $product->limit(4);
+        }])->latest()->limit(5)->get();
+
+
+        $categories_products = CategoryCollection::collection($categories);
+
+
+        $response = ['categories' => $categories_products];
+
+        return $this->sendResponse($response, '');
+
+
+    }
     // -------------------------------------------------------------
     // -------------------------------------------------------------
     // -------------------------------------------------------------
