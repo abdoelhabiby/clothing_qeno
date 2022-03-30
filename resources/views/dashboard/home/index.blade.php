@@ -206,7 +206,7 @@
 
 
 
-                    {{-- <div class="col-xl-4 col-lg-12">
+                    <div class="col-xl-4 col-lg-12">
                      <div class="card">
                          <div class="card-header">
                              <h4 class="card-title">New Orders</h4>
@@ -382,11 +382,11 @@
                              </div>
                          </div>
                      </div>
-                 </div> --}}
+                 </div>
                 </div>
                 <!--/ Products sell and New Orders -->
                 <!-- Recent Transactions -->
-                {{-- <div class="row">
+                <div class="row">
                  <div id="recent-transactions" class="col-12">
                      <div class="card">
                          <div class="card-header">
@@ -661,7 +661,7 @@
                          </div>
                      </div>
                  </div>
-             </div> --}}
+             </div>
                 <!--/ Recent Transactions -->
                 <!--Recent Orders & Monthly Sales -->
                 <div class="row match-height">
@@ -716,7 +716,7 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="col-xl-4 col-lg-12">
+                    <div class="col-xl-4 col-lg-12">
                      <div class="card">
                          <div class="card-content">
                              <div class="card-body sales-growth-chart">
@@ -734,11 +734,11 @@
                              </div>
                          </div>
                      </div>
-                 </div> --}}
+                 </div>
                 </div>
                 <!--/Recent Orders & Monthly Sales -->
                 <!-- Basic Horizontal Timeline -->
-                {{-- <div class="row match-height">
+                <div class="row match-height">
                  <div class="col-xl-4 col-lg-12">
                      <div class="card">
                          <div class="card-header">
@@ -991,7 +991,7 @@
                          </div>
                      </div>
                  </div>
-             </div> --}}
+             </div>
                 <!--/ Basic Horizontal Timeline -->
 
 
