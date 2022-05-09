@@ -4,106 +4,68 @@
 
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
 
+
             {{-- -------------------home----------------------- --}}
 
-            <li class=" @if (request()->routeIs('dashboard.home')) active @endif"><a href="{{ route('dashboard.home') }}">
-                    <i class="la la-envelope"></i>
-                    <span class="menu-title" data-i18n="">Home</span></a>
-            </li>
-            {{-- --------------------------------------------------- --}}
+            <x-dashboard.sidbar-item name="home" :one-list="true" route-name-open="dashboard.home">
+                <x-slot name="icon"> <i class="la la-car"></i> </x-slot>
+            </x-dashboard.sidbar-item>
 
+            {{-- ----------------users livewire show--------- --}}
 
-                {{-- -------------------users----------------------- --}}
+            {{-- <x-dashboard.sidbar-item name="users" count="{{ App\Models\User::count() }}" :one-list="true" route-name-open="dashboard.livewire.show_usesr">
+                <x-slot name="icon"> <i class="la la-car"></i> </x-slot>
+            </x-dashboard.sidbar-item> --}}
 
-                <li class="nav-item @if (request()->routeIs(['dashboard.users.index', 'dashboard.users.create','dashboard.users.edit'])) open active @endif }}">
+            {{-- ---------------------------------------------- --}}
 
-                    @php
-                        $module_name = 'users';
-                    @endphp
+            {{-- -------------------users----------------------- --}}
+            @php  $module_name = 'users';  @endphp
 
-                    <a href=""><i class="la la-users"></i>
-                        <span class="menu-title" data-i18n="nav.dash.main"> {{ ucfirst($module_name) }}</span>
-                        <span
-                            class="badge badge badge-info badge-pill float-right mr-2">{{ App\Models\User::count() }}</span>
-                    </a>
-                    <ul class="menu-content">
-                        <li class="{{ request()->routeIs('dashboard.' . $module_name . '.index') ? 'active' : '' }}"><a
-                                class="menu-item" href="{{ route('dashboard.' . $module_name . '.index') }}"
-                                data-i18n="nav.dash.ecommerce">show all </a>
-                        </li>
-                        <li class="{{ request()->routeIs('dashboard.' . $module_name . '.create') ? 'active' : '' }}">
-                            <a class="menu-item" href="{{ route('dashboard.' . $module_name . '.create') }}"
-                                data-i18n="nav.dash.crypto">
-                                add
-                            </a>
-                        </li>
+            <x-dashboard.sidbar-item name="{{ $module_name }}" :one-list="false"
+                route-name-open="dashboard.{{ $module_name }}.*" count="{{ App\Models\User::count() }}">
+                <x-slot name="icon"> <i class="la la-list"></i> </x-slot>
 
-
-                    </ul>
-                </li>
-                {{-- --------------------------------------------------- --}}
-
-            {{-- -------------------categories----------------------- --}}
-
-            <li class="nav-item @if (request()->routeIs(['dashboard.categories.index', 'dashboard.categories.create','dashboard.categories.edit'])) open active @endif }}">
-
-                @php
-                    $module_name = 'categories';
-                @endphp
-
-                <a href=""><i class="la la-list"></i>
-                    <span class="menu-title" data-i18n="nav.dash.main"> {{ ucfirst($module_name) }}</span>
-                    <span
-                        class="badge badge badge-info badge-pill float-right mr-2">{{ App\Models\Category::count() }}</span>
-                </a>
                 <ul class="menu-content">
-                    <li class="{{ request()->routeIs('dashboard.' . $module_name . '.index') ? 'active' : '' }}"><a
-                            class="menu-item" href="{{ route('dashboard.' . $module_name . '.index') }}"
-                            data-i18n="nav.dash.ecommerce">show all </a>
-                    </li>
-                    <li class="{{ request()->routeIs('dashboard.' . $module_name . '.create') ? 'active' : '' }}">
-                        <a class="menu-item" href="{{ route('dashboard.' . $module_name . '.create') }}"
-                            data-i18n="nav.dash.crypto">
-                            add
-                        </a>
-                    </li>
-
-
+                    <x-dashboard.sidbar-item-list name="show all" route-name="dashboard.{{ $module_name }}.index" />
+                    <x-dashboard.sidbar-item-list name="add" route-name="dashboard.{{ $module_name }}.create" />
                 </ul>
-            </li>
+
+            </x-dashboard.sidbar-item>
+
             {{-- --------------------------------------------------- --}}
+            {{-- ------------------categories-------------- --}}
+
+            @php  $module_name = 'categories';  @endphp
+
+            <x-dashboard.sidbar-item name="{{ $module_name }}" :one-list="false"
+                route-name-open="dashboard.{{ $module_name }}.*" count="{{ App\Models\Category::count() }}">
+                <x-slot name="icon"> <i class="la la-list"></i> </x-slot>
+
+                <ul class="menu-content">
+                    <x-dashboard.sidbar-item-list name="show all" route-name="dashboard.{{ $module_name }}.index" />
+                    <x-dashboard.sidbar-item-list name="add" route-name="dashboard.{{ $module_name }}.create" />
+                </ul>
+
+            </x-dashboard.sidbar-item>
+
+            {{-- ---------------------------------------------- --}}
 
 
-                {{-- -------------------products----------------------- --}}
+            {{-- -------------------products----------------------- --}}
+            @php  $module_name = 'products';  @endphp
+            <x-dashboard.sidbar-item name="{{ $module_name }}" :one-list="false"
+                route-name-open="dashboard.{{ $module_name }}.*" count="{{ App\Models\Product::count() }}">
+                <x-slot name="icon"> <i class="la la-list"></i> </x-slot>
 
-                <li class="nav-item @if (request()->routeIs(['dashboard.products.index', 'dashboard.products.create','dashboard.products.edit'])) open active @endif }}">
+                <ul class="menu-content">
+                    <x-dashboard.sidbar-item-list name="show all" route-name="dashboard.{{ $module_name }}.index" />
+                    <x-dashboard.sidbar-item-list name="add" route-name="dashboard.{{ $module_name }}.create" />
+                </ul>
 
-                    @php
-                        $module_name = 'products';
-                    @endphp
+            </x-dashboard.sidbar-item>
 
-                    <a href=""><i class="la la-list"></i>
-                        <span class="menu-title" data-i18n="nav.dash.main"> {{ ucfirst($module_name) }}</span>
-                        <span
-                            class="badge badge badge-info badge-pill float-right mr-2">{{ App\Models\Product::count() }}</span>
-                    </a>
-                    <ul class="menu-content">
-                        <li class="{{ request()->routeIs('dashboard.' . $module_name . '.index') ? 'active' : '' }}"><a
-                                class="menu-item" href="{{ route('dashboard.' . $module_name . '.index') }}"
-                                data-i18n="nav.dash.ecommerce">show all </a>
-                        </li>
-                        <li class="{{ request()->routeIs('dashboard.' . $module_name . '.create') ? 'active' : '' }}">
-                            <a class="menu-item" href="{{ route('dashboard.' . $module_name . '.create') }}"
-                                data-i18n="nav.dash.crypto">
-                                add
-                            </a>
-                        </li>
-
-
-                    </ul>
-                </li>
-                {{-- --------------------------------------------------- --}}
-
+            {{-- --------------------------------------------------- --}}
 
         </ul>
 

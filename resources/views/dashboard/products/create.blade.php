@@ -90,9 +90,10 @@ $model_name = 'products';
                                                               Categories
                                                             </div>
 
-                                                            <select class="select2 form-control " name="categories[]" multiple id="id_h5_multi" tabindex="-1" aria-hidden="true">
+                                                            <select class="select2 form-control select-multiple" name="categories[]" multiple id="id_h5_multi" tabindex="-1" aria-hidden="true">
 
                                                                 @if(isset($categories) && $categories->count() > 0)
+
 
                                                                    @foreach ($categories as $category)
 
@@ -160,4 +161,13 @@ $model_name = 'products';
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+<script>
+    $('.select-multiple').select2({
+    placeholder: "Select Category",
+});
+</script>
+
 @endsection

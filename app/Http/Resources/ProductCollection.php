@@ -6,9 +6,8 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class ProductCollection extends JsonResource
+class ProductCollection extends JsonResource // main
 {
-
 
     /**
      * Transform the resource collection into an array.
@@ -16,6 +15,8 @@ class ProductCollection extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
+
+
     public function toArray($request)
     {
 
@@ -28,7 +29,7 @@ class ProductCollection extends JsonResource
             'vendor' => $this->vendor ?  $this->vendor->name : null,
             "is_active" => $this->is_active ? 'active' : "deactive",
             "image" => $this->image && File::exists(public_path($this->image)) ? asset($this->image) : pathNoImage(),
-            'created_at' => $this->created_at?->format('d-m-Y'),
+            'created_at' => $this->created_at?->format('d-m-Y H:i:s'),
         ];
     }
 }

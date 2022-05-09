@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Dashboard;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use App\Http\Services\FileService;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
 use App\Http\Requests\Dashboard\ProductRequest;
 
 class ProductController extends Controller
@@ -31,9 +33,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = Category::select(['id','name'])->get();
+        $categories = Category::select(['id', 'name'])->get();
 
-        return view('dashboard.products.create',compact('categories'));
+        return view('dashboard.products.create', compact('categories'));
     }
 
     /**
@@ -42,6 +44,9 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
+    // --------main--------------------------------------
     public function store(ProductRequest $request)
     {
 
@@ -57,23 +62,19 @@ class ProductController extends Controller
 
             if ($request->hasFile('image') && $request->image != null) {
 
-                $folder_path = public_path('images/products');
-
-                FileService::checkDirectoryExistsOrCreate($folder_path);
-
-                $image = $request->file('image');
-                $path = 'images/products/' . $image->hashName();
-                FileService::reszeImageAndSave($image, public_path(), $path);
-                $validated['image'] = $path;
+                $image = $request->image;
+                $folder = 'images/products';
+                $image_name = $image->hashName();
+                $validated['image'] = FileService::saveImage($image, public_path(), $folder, $image_name);
             }
 
             $categories = [];
 
-            if($request->categories){
-                $categories = $request->categories ;
+            if ($request->categories && count($request->categories) > 0) {
+                $categories = $request->categories;
                 unset($validated['categories']);
-
             }
+
 
             $validated['vendor_id'] = admin()->id;
 
@@ -83,20 +84,20 @@ class ProductController extends Controller
 
 
             DB::commit();
+            sweetAlertFlush( 'success', 'success' , 'Data has been saved successfully!');
 
-            return redirect()->route('dashboard.products.index')->with('success_message', 'succes create category');
+            return redirect()->route('dashboard.products.index');
         } catch (\Throwable $th) {
 
             DB::rollback();
 
 
-            return redirect()->back()->with('error_message', 'some erros happend tray again');
+            return catchErro('dashboard.users.index', $th);
         }
+    } //end method
 
 
-    }//end method
-
-
+    // --------main--------------------------------------
 
     /**
      * Show the form for editing the specified resource.
@@ -106,11 +107,11 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-       $row = $product;
-       $categories = Category::select(['id','name'])->get();
+        $row = $product;
+        $categories = Category::select(['id', 'name'])->get();
 
 
-       return view('dashboard.products.edit',compact(['row','categories']));
+        return view('dashboard.products.edit', compact(['row', 'categories']));
     }
 
     /**
@@ -135,27 +136,22 @@ class ProductController extends Controller
 
             if ($request->hasFile('image') && $request->image != null) {
 
-                $folder_path = public_path('images/products');
+                $image = $request->image;
+                $folder = 'images/products';
+                $image_name = $image->hashName();
+                $validated['image'] = FileService::saveImage($image, public_path(), $folder, $image_name);
 
-                FileService::checkDirectoryExistsOrCreate($folder_path);
 
-                $image = $request->file('image');
-                $path = 'images/products/' . $image->hashName();
-                FileService::reszeImageAndSave($image, public_path(), $path);
-                $validated['image'] = $path;
-
-                if($product->image){
+                if ($product->image) {
                     FileService::deleteFile(public_path($product->image));
                 }
-
             }
 
             $categories = [];
 
-            if($request->categories){
-                $categories = $request->categories ;
+            if ($request->categories) {
+                $categories = $request->categories;
                 unset($validated['categories']);
-
             }
 
             $validated['vendor_id'] = admin()->id;
@@ -166,19 +162,16 @@ class ProductController extends Controller
 
 
             DB::commit();
+            sweetAlertFlush( 'success', 'success' , 'Data has been saved successfully!');
 
-            return redirect()->route('dashboard.products.index')->with('success_message', 'succes update category');
-
+            return redirect()->route('dashboard.products.index');
         } catch (\Throwable $th) {
 
             DB::rollback();
 
 
-            return redirect()->back()->with('error_message', 'some erros happend tray again');
+            return catchErro('dashboard.users.index', $th);
         }
-
-
-
     }
 
     /**
@@ -190,19 +183,20 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
 
-        try{
+        try {
 
-            if($product->image){
+            if ($product->image) {
                 FileService::deleteFile(public_path($product->image));
             }
 
-         $product->delete();
+            $product->delete();
+            sweetAlertFlush( 'success', 'success' , 'Data has been deleted successfully!');
 
-            return redirect()->route('dashboard.products.index')->with('success_message', 'succes delete category');
+            return redirect()->route('dashboard.products.index');
         } catch (\Throwable $th) {
 
 
-            return redirect()->back()->with('error_message', 'some erros happend tray again');
+            return catchErro('dashboard.users.index', $th);
         }
-    }//-
+    } //-
 }

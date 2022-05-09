@@ -25,8 +25,8 @@ class CategoryCollection extends JsonResource
             "slug" => $this->slug,
             "is_active" => $this->is_active ? 'active' : "deactive",
             "image" => $this->image && File::exists(public_path($this->image)) ? asset($this->image) : pathNoImage(),
-            "products" => ProductCollection::collection($this->whenLoaded('products')),
             'created_at' => $this->created_at?->format('d-m-Y'),
+            "products" => ProductCollection::collection($this->whenLoaded('products')),
 
         ];
     }

@@ -20,7 +20,8 @@
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
     <!-- BEGIN VENDOR CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/dashboard') }}/app-assets/css/vendors.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/dashboard') }}/app-assets/vendors/css/forms/selects/select2.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('assets/dashboard') }}/app-assets/vendors/css/forms/selects/select2.min.css">
 
     <link rel="stylesheet" type="text/css"
         href="{{ asset('assets/dashboard') }}/app-assets/vendors/css/weather-icons/climacons.min.css">
@@ -47,21 +48,34 @@
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/dashboard') }}/assets/css/style.css">
     <!-- END Custom CSS-->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.8/sweetalert2.min.css"
+        integrity="sha512-y4S4cBeErz9ykN3iwUC4kmP/Ca+zd8n8FDzlVbq5Nr73gn1VBXZhpriQ7avR+8fQLpyq4izWm0b8s6q4Vedb9w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    @yield('css')
+
+    @livewireStyles
+
 </head>
 
 <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click"
     data-menu="vertical-menu" data-col="2-columns">
     <!-- fixed-top-->
 
-@include('dashboard.layouts._nav')
+    @include('dashboard.layouts._nav')
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
- @include('dashboard.layouts._sidbar')
+    @include('dashboard.layouts._sidbar')
 
 
+    @yield('content')
 
-                @yield('content')
+    {{-- @isset($slot)
+        {{ $slot }}
+    @endisset --}}
 
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
@@ -77,7 +91,8 @@
     </footer>
     <!-- BEGIN VENDOR JS-->
     <script src="{{ asset('assets/dashboard') }}/app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
-    <script src="{{ asset('assets/dashboard') }}/app-assets/vendors/js/forms/select/select2.full.min.js" type="text/javascript"></script>
+    <script src="{{ asset('assets/dashboard') }}/app-assets/vendors/js/forms/select/select2.full.min.js"
+        type="text/javascript"></script>
 
     <!-- BEGIN VENDOR JS-->
     <!-- BEGIN PAGE VENDOR JS-->
@@ -90,11 +105,72 @@
     <script src="{{ asset('assets/dashboard') }}/app-assets/js/core/app.js" type="text/javascript"></script>
     <script src="{{ asset('assets/dashboard') }}/app-assets/js/scripts/customizer.js" type="text/javascript"></script>
 
-    <script src="{{ asset('assets/dashboard') }}/app-assets/js/scripts/forms/select/form-select2.js" type="text/javascript"></script>
+    <script src="{{ asset('assets/dashboard') }}/app-assets/js/scripts/forms/select/form-select2.js"
+        type="text/javascript"></script>
 
     <!-- END MODERN JS-->
 
+    {{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.8/sweetalert2.min.js"
+        integrity="sha512-7x7HoEikRZhV0FAORWP+hrUzl75JW/uLHBbg2kHnPdFmScpIeHY0ieUVSacjusrKrlA/RsA2tDOBvisFmKc3xw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+
+    @livewireScripts
+
+
     @yield('js')
+
+
+    @if (session()->has('sweet_alert'))
+        <script>
+            var type = "{{ session()->get('sweet_alert')['type'] }}";
+            var title = "{{ session()->get('sweet_alert')['title'] }}";
+            var message = "{{ session()->get('sweet_alert')['message'] }}";
+
+            Swal.fire({
+                title: title,
+                text: message,
+                showConfirmButton: false,
+                showCloseButton: true,
+                icon: type,
+                timer: 2000,
+                position: 'top-end',
+                toast: true,
+            })
+        </script>
+    @endif
+
+
+    <script>
+
+
+
+
+        window.addEventListener('alert', event => {
+
+
+            Swal.fire({
+                title: event.detail.title,
+                text: event.detail.message,
+                showConfirmButton: false,
+                showCloseButton: true,
+                icon: event.detail.type,
+                timer: 2000,
+                position: 'top-end',
+                toast: true,
+            });
+
+
+        });
+    </script>
+
+
+
 
 </body>
 

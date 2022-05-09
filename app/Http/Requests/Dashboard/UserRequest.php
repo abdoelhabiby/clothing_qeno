@@ -28,7 +28,7 @@ class UserRequest extends FormRequest
             "name" => "required|string|min:3|max:100",
             "email" => "required|string|email|max:100|" . Rule::unique('users', 'email')->ignore($this->user),
             "password" => "required|string|min:8|max:100|confirmed",
-            "image" => "sometimes|nullable|image|mimes:png,jpg,jpeg|max:8000",
+            "image" => "sometimes|nullable|image|mimes:png,jpg,jpeg|max:2000",
         ];
 
 

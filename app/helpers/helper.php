@@ -39,6 +39,15 @@ if (!function_exists('fileExists')) {
 
 // --------------------------------------------
 
+if (!function_exists('sweetAlertFlush')) {
+
+    function sweetAlertFlush($type = 'success',$title = '',$message = '')
+    {
+        session()->flash('sweet_alert',['type' => $type,'title'=> $title , 'message' => $message]);
+    }
+}
+// --------------------------------------------
+
 
 if (!function_exists('pathNoImage')) {
 
@@ -57,7 +66,9 @@ if (!function_exists('catchErro')) {
 
         \Illuminate\Support\Facades\Log::alert($error_catch);
 
-        return redirect()->route($route_name)->with(['error_message' => $message]);
+        sweetAlertFlush( 'error', 'error' , $message);
+
+        return redirect()->route($route_name);
     }
 }
 

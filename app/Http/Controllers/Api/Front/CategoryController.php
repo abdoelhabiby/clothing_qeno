@@ -14,7 +14,7 @@ class CategoryController extends BaseController
 
     public function __construct(Request $request)
     {
-        $this->per_page_paginate = (int) $request->per_page && $request->per_page  > 0 ? $request->per_page : 5;
+        $this->per_page_paginate = (int) $request->per_page && $request->per_page  > 0 ? $request->per_page : API_PAGINATE_COUNT;
     }
 
 
@@ -28,13 +28,11 @@ class CategoryController extends BaseController
         $per_page = $this->per_page_paginate;
         $query_append = ['per_page' => $per_page];
 
-        $categories = Category::latest()->paginate($per_page)->appends($query_append);
+        $categories = Category::latest()->get();
 
-        $categories_paginate = CategoryCollection::collection($categories)->response()->getData(true);
+        $categories_paginate = CategoryCollection::collection($categories);
 
-        if (isset($categories_paginate['meta']['links'])) {
-            unset($categories_paginate['meta']['links']);
-        }
+
 
         $response = ['categories' => $categories_paginate];
 
@@ -55,13 +53,26 @@ class CategoryController extends BaseController
         $category = new CategoryCollection($category);
 
 
-        $products = ProductCollection::collection($products)->response()->getData(true);
+        $products_collection = ProductCollection::collection($products)->response()->getData(true);
 
-        if (isset($products['meta']['links'])) {
-            unset($products['meta']['links']);
+        if (isset($products_collection['meta']['links'])) {
+            unset($products_collection['meta']['links']);
         }
 
-        $response = ['category' => $category, 'products' => $products];
+
+        $products_data = isset($products_collection['data']) ? $products_collection['data'] : [];
+        $links = isset($products_collection['links']) ? $products_collection['links'] : [];
+        $meta = isset($products_collection['meta']) ? $products_collection['meta'] : [];
+
+        $response = [
+            'category' => $category,
+            'products' => $products_data,
+            'links' => $links,
+            'meta' => $meta
+        ];
+
+
+        // $response = ['category' => $category, 'products' => $products];
 
         return $this->sendResponse($response, '');
     }
@@ -73,7 +84,7 @@ class CategoryController extends BaseController
 
 
 
-        $categories = Category::latest()->with(['products' => function($product){
+        $categories = Category::latest()->with(['products' => function ($product) {
             $product->limit(4);
         }])->latest()->limit(5)->get();
 
@@ -84,8 +95,6 @@ class CategoryController extends BaseController
         $response = ['categories' => $categories_products];
 
         return $this->sendResponse($response, '');
-
-
     }
     // -------------------------------------------------------------
     // -------------------------------------------------------------

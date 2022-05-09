@@ -19,9 +19,9 @@ class CategoryController extends Controller
     public function index()
     {
 
-        $rows = Category::orderBy('id', 'desc')->paginate(DASHBOARD_PAGINATE_COUNT);
+        // $rows = Category::orderBy('id', 'desc')->paginate(DASHBOARD_PAGINATE_COUNT);
 
-        return view('dashboard.categories.index', compact('rows'));
+        return view('dashboard.categories.index');
     }
 
     /**
@@ -56,27 +56,23 @@ class CategoryController extends Controller
 
             if ($request->hasFile('image') && $request->image != null) {
 
-                $folder_path = public_path('images/categories');
-
-                FileService::checkDirectoryExistsOrCreate($folder_path);
-
-                $image = $request->file('image');
-                $path = 'images/categories/' . $image->hashName();
-                FileService::reszeImageAndSave($image, public_path(), $path);
-                $validated['image'] = $path;
+                $image = $request->image;
+                $folder = 'images/categories';
+                $image_name = $image->hashName();
+                $validated['image'] = FileService::saveImage($image, public_path(), $folder, $image_name);
             }
 
             Category::create($validated);
+            sweetAlertFlush('success', 'success', 'Data has been stored successfully!');
 
-            return redirect()->route('dashboard.categories.index')->with('success_message', 'succes create category');
+
+            return redirect()->route('dashboard.categories.index');
         } catch (\Throwable $th) {
 
 
-            return redirect()->back()->with('error_message', 'some erros happend tray again');
+            return catchErro('dashboard.users.index', $th);
         }
-
-
-    }//end method
+    } //end method
 
 
 
@@ -114,30 +110,27 @@ class CategoryController extends Controller
 
             if ($request->hasFile('image') && $request->image != null) {
 
-                $folder_path = public_path('images/categories');
-                FileService::checkDirectoryExistsOrCreate($folder_path);
-
-                $image = $request->file('image');
-                $path = 'images/categories/' . $image->hashName();
-                FileService::reszeImageAndSave($image, public_path(), $path);
-                $validated['image'] = $path;
+                $image = $request->image;
+                $folder = 'images/categories';
+                $image_name = $image->hashName();
+                $validated['image'] = FileService::saveImage($image, public_path(), $folder, $image_name);
 
 
-                if($category->image){
+                if ($category->image) {
                     FileService::deleteFile(public_path($category->image));
                 }
-
             }
 
             $category->update($validated);
+            sweetAlertFlush('success', 'success', 'Data has been stored successfully!');
 
-            return redirect()->route('dashboard.categories.index')->with('success_message', 'succes update category');
+            return redirect()->route('dashboard.categories.index');
         } catch (\Throwable $th) {
 
 
-            return redirect()->back()->with('error_message', 'some erros happend tray again');
+            return catchErro('dashboard.users.index', $th);
         }
-    }//----end of method
+    } //----end of method
 
     /**
      * Remove the specified resource from storage.
@@ -149,18 +142,19 @@ class CategoryController extends Controller
     {
 
 
-        try{
+        try {
 
-            if($category->image){
+            if ($category->image) {
                 FileService::deleteFile(public_path($category->image));
             }
 
-         $category->delete();
+            $category->delete();
+            sweetAlertFlush('success', 'success', 'Data has been deleted successfully!');
 
-            return redirect()->route('dashboard.categories.index')->with('success_message', 'succes delete category');
+            return redirect()->route('dashboard.categories.index');
         } catch (\Throwable $th) {
 
-            return redirect()->back()->with('error_message', 'some erros happend tray again');
+            return catchErro('dashboard.users.index', $th);
         }
-    }//----end of method
+    } //----end of method
 }

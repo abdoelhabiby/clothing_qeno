@@ -72,56 +72,16 @@ $model_name = 'categories';
                                                     {{ Str::singular($model_name) }} data </h4>
 
 
-                                                <div class="row">
 
 
+                                                 <div class="row">
 
-                                                    <div class="col-md-6">
+                                                    <x-inputs.input_row_form label="Name" name="name" placeholder="input name" rows_number="6" />
+                                                     <x-inputs.input_row_form label="Slug" name="slug" placeholder="input slug"  />
+                                                    <x-inputs.input_row_form label="image" type="file" name="image" placeholder="input image"  />
 
-                                                        <div class="form-group">
-                                                            <label for="name"> name
-                                                            </label>
-                                                            <input type="text" value="{{ old('name') }}" id="name"
-                                                                class="form-control" placeholder="input name" name="name">
-                                                            @error('name')
-                                                                <span class="text-danger">{{ $message }}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
+                                                 </div>
 
-                                                    {{-- --------------slug --}}
-                                                    <div class="col-md-6">
-
-                                                        <div class="form-group">
-                                                            <label for="slug"> slug
-                                                            </label>
-                                                            <input type="text" value="{{ old('slug') }}" id="slug"
-                                                                class="form-control" placeholder="input slug" name="slug">
-                                                            @error('slug')
-                                                                <span class="text-danger">{{ $message }}</span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-
-                                                    {{-- ---------------------------------- --}}
-
-                                                    <div class="col-md-6">
-                                                        @php
-                                                            $input = 'image';
-                                                        @endphp
-                                                        <div class="form-group">
-                                                            <label for="{{ $input }}"> {{ $input }} </label>
-                                                            <input type="file" id="{{ $input }}"
-                                                                class="form-control" name=" {{ $input }}">
-                                                            @error($input)
-                                                                <span class="text-danger">{{ $message }} </span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
 
 
 

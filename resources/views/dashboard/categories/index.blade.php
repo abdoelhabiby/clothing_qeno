@@ -33,8 +33,7 @@ $model_name = 'categories';
 
             <div class="content-body">
 
-                @include('dashboard.includes.alerts.success')
-                @include('dashboard.includes.alerts.errors')
+
 
                 <!-- DOM - jQuery events table -->
                 <section id="dom">
@@ -42,7 +41,9 @@ $model_name = 'categories';
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title"> {{ $model_name }}</h4>
+                                    <a class="btn btn-info mb-2" href="{{ route('dashboard.' . $model_name . '.create') }}" style="color: wheat">
+                                        <i class="la la-plus" style="font-size:15px"></i> <strong>Add</strong>
+                                    </a>
 
                                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -64,62 +65,11 @@ $model_name = 'categories';
 
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard">
-                                        <a class="btn btn-info mb-2" href="{{ route('dashboard.' . $model_name . '.create') }}" style="color: wheat">
-                                            <i class="la la-plus" style="font-size:15px"></i> <strong>Add</strong>
-                                        </a>
-                                        <table class="table display nowrap table-striped table-bordered ">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>slug</th>
-                                                    <th>Name</th>
-                                                    <th>Active</th>
-                                                    <th>Action</th>
 
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                @if ($rows->count() > 0)
-                                                    @foreach ($rows as $index => $row)
-                                                        <tr>
-                                                            <td> {{ orderNumberOfRows($rows->perPage()) + $index + 1 }}
-                                                            </td>
-                                                            <td>{{ $row->slug }}</td>
-                                                            <td>{{ $row->name }}</td>
-                                                            <td>{{ $row->is_active ? 'active' : 'deactive' }}</td>
-                                                            <td>
-                                                                <div class="btn-group" role="group"
-                                                                    aria-label="Basic example">
-
-                                                                    <a href="{{ route('dashboard.' . $model_name . '.edit', $row->id) }}"
-                                                                        class="btn btn-outline-primary btn-min-width box-shadow-3 mr-1 mb-1">
-                                                                        Edit
-                                                                    </a>
-
-                                                                    <button type="button" id="custom_button_delete"
-                                                                        data-action="{{ route('dashboard.' . $model_name . '.destroy', $row->id) }}"
-                                                                        data-name="{{ $row->name }}"
-                                                                        class="btn btn-outline-danger btn-min-width box-shadow-3 mr-1 mb-1">
-                                                                        Delete
-                                                                    </button>
-
-                                                                </div>
-
-                                                                <i class="la la-automobile"></i>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                @endif
+                                        @livewire('dashboard.show-categories')
 
 
 
-
-
-
-
-                                            </tbody>
-                                        </table>
 
                                     </div>
                                 </div>
@@ -128,9 +78,7 @@ $model_name = 'categories';
                         </div>
                     </div>
 
-                    <div class="justify-content-center d-flex">
-                        {{ $rows->links() }}
-                 </div>
+
                 </section>
 
 
@@ -143,7 +91,7 @@ $model_name = 'categories';
     </div>
 
 
-    @include('dashboard.includes.alerts.model_delete')
+    {{-- @include('dashboard.includes.alerts.model_delete') --}}
 
 @endsection
 
@@ -154,14 +102,14 @@ $model_name = 'categories';
         $(function() {
 
 
-            $("body").on("click", "#custom_button_delete", function() {
-                var action = $(this).data("action"),
-                    name = $(this).data("name");
-                $("#custom_modal_delete form").attr("action", action);
-                $("#custom_modal_delete .modal-body span").text(name);
-                $("#custom_modal_delete").modal("show");
+            // $("body").on("click", "#custom_button_delete", function() {
+            //     var action = $(this).data("action"),
+            //         name = $(this).data("name");
+            //     $("#custom_modal_delete form").attr("action", action);
+            //     $("#custom_modal_delete .modal-body span").text(name);
+            //     $("#custom_modal_delete").modal("show");
 
-            });
+            // });
 
 
 

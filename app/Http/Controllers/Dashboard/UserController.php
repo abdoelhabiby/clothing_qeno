@@ -12,16 +12,26 @@ use App\Http\Requests\Dashboard\UserRequest;
 class UserController extends Controller
 {
 
+    public function __construct()
+    {
+
+
+        $this->middleware('permission:read_users')->only('index');
+        $this->middleware('permission:create_users')->only(['create', 'store']);
+        $this->middleware('permission:update_users')->only(['edit', 'update']);
+        // $this->middleware('permission:delete_users')->only('destroy');
+    }
+
+
 
 
     //------------------------shoew all uesrs------------------
     public function index()
     {
-        $rows = User::paginate(DASHBOARD_PAGINATE_COUNT);
-        return view('dashboard.users.index', compact('rows'));
+        return view('dashboard.users.index');
     }
 
-    //------------------------show all uesrs------------------
+    //-----------------------------------------------
 
 
     //------------------------create uesr------------------
@@ -51,23 +61,21 @@ class UserController extends Controller
 
             if ($request->hasFile('image') && $request->image != null) {
 
+                $image = $request->image;
+                $folder = 'images/users';
+                $image_name = $image->hashName();
+                $validated['image'] = FileService::saveImage($image, public_path(), $folder, $image_name);
 
-                $folder_path = public_path('images/users');
-                FileService::checkDirectoryExistsOrCreate($folder_path);
+            }else{
 
-                $image = $request->file('image');
-                $path = 'images/users/' . $image->hashName();
-                FileService::reszeImageAndSave($image, public_path(), $path,50,50);
-                $validated['image'] = $path;
-
-
-
-
+                $validated['image'] = 'images/user_default.png';
             }
 
             User::create($validated);
 
-            return redirect()->route('dashboard.users.index')->with(['success_message' => "success create"]);
+            sweetAlertFlush( 'success', 'success' , 'Data has been saved successfully!');
+
+            return redirect()->route('dashboard.users.index');
         } catch (\Throwable $th) {
             return catchErro('dashboard.users.index', $th);
         }
@@ -111,20 +119,12 @@ class UserController extends Controller
 
             if ($request->hasFile('image') && $request->image != null) {
 
-                $folder_path = public_path('images/users');
-                FileService::checkDirectoryExistsOrCreate($folder_path);
+                $image = $request->image;
+                $folder = 'images/users';
+                $image_name = $image->hashName();
+                $validated['image'] = FileService::saveImage($image, public_path(), $folder, $image_name);
 
-                $image = $request->file('image');
-                $path = 'images/users/' . $image->hashName();
-
-                FileService::reszeImageAndSave($image, public_path(), $path);
-                $validated['image'] = $path;
                 FileService::deleteFile(public_path($user->image));
-
-
-
-                // ---------------------------------
-
 
             }
 
@@ -132,8 +132,9 @@ class UserController extends Controller
 
             $user->update($validated);
 
+            sweetAlertFlush( 'success', 'success' , 'Data has been saved successfully!');
 
-            return redirect()->route('dashboard.users.index')->with(['success_message' => "success update"]);
+            return redirect()->route('dashboard.users.index');
         } catch (\Throwable $th) {
             return catchErro('dashboard.users.index', $th);
         }
@@ -144,22 +145,23 @@ class UserController extends Controller
     //----------------delete user ------------------
 
 
-    public function destroy(User $user)
-    {
+    // public function destroy(User $user)
+    // {
 
-        try {
+    //     try {
 
 
 
-            if($user->image){
-                FileService::deleteFile(public_path($user->image));
-            }
+    //         if($user->image){
+    //             FileService::deleteFile(public_path($user->image));
+    //         }
 
-            $user->delete();
+    //         $user->delete();
 
-            return redirect()->route('dashboard.users.index')->with('success_message', 'succes delete');
-        } catch (\Throwable $th) {
-            return catchErro('dashboard.users.index', $th);
-        }
-    }
+    //         return redirect()->route('dashboard.users.index')->with('success_message', 'succes delete');
+    //     } catch (\Throwable $th) {
+    //         return catchErro('dashboard.users.index', $th);
+    //     }
+    // }
+
 }

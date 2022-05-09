@@ -15,23 +15,36 @@ class ProductController extends BaseController
 
 
 
-         $per_page =(int) $request->per_page && $request->per_page  > 0 ? $request->per_page : 5;
-
+         $per_page =(int) $request->per_page && $request->per_page  > 0 ? $request->per_page : API_PAGINATE_COUNT;
          $query_append = ['per_page' => $per_page];
-
          $products = Product::latest()->paginate($per_page)->appends($query_append);
 
          $products_collection = ProductCollection::collection($products)->response()->getData(true);
+
 
           if(isset($products_collection['meta']['links'])){
               unset($products_collection['meta']['links']);
           }
 
-        $response = ['products' => $products_collection];
+          $products_data = isset($products_collection['data']) ? $products_collection['data'] : [];
+          $links = isset($products_collection['links']) ? $products_collection['links'] : [];
+          $meta = isset($products_collection['meta']) ? $products_collection['meta'] : [];
+
+         $response = [
+             'products' => $products_data,
+             'links' => $links,
+             'meta' => $meta
+            ];
 
         return $this->sendResponse($response,'');
 
 
     }
+
+
+
+
+
+    // -----------------------------------------------
 
 }

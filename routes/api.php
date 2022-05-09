@@ -2,11 +2,14 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\Front\UserController;
+use App\Http\Controllers\Api\Front\AuthUserController;
 use App\Http\Controllers\Api\Front\ProductController;
 use App\Http\Controllers\Api\Front\CategoryController;
 
 
+if (!defined('API_PAGINATE_COUNT')) {
+    define('API_PAGINATE_COUNT', 10);
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +24,10 @@ use App\Http\Controllers\Api\Front\CategoryController;
 
 Route::prefix('user')->group(function () {
 
-    Route::get('/', [UserController::class, 'getUser'])->middleware('auth:sanctum');
+    Route::get('/', [AuthUserController::class, 'getUser'])->middleware('auth:sanctum');
 
-    Route::post('/register', [UserController::class, 'register']);
-    Route::post('/login', [UserController::class, 'login']);
+    Route::post('/register', [AuthUserController::class, 'register']);
+    Route::post('/login', [AuthUserController::class, 'login']);
 });
 
 
